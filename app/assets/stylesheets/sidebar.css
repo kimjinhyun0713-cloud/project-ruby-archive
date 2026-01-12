@@ -1,0 +1,84 @@
+/* --- Indexページ全体のレイアウト (左右カラム) --- */
+.index-layout {
+  display: flex;
+  align-items: flex-start; /* 上端揃え */
+  gap: 20px;               /* 左右の間隔 */
+  max-width: 1000px;       /* 画面全体の幅制限 */
+  margin: 0 auto;          /* 中央寄せ */
+  padding: 40px 20px;      /* 全体の余白 */
+  box-sizing: border-box;
+}
+
+/* 左サイドバー */
+.index-sidebar {
+  width: 250px;    /* 幅を固定 */
+  flex-shrink: 0;  /* 画面が狭くなってもこれ以上縮めない */
+}
+
+/* 右メインコンテンツ */
+.index-main {
+  flex-grow: 1;    /* 残りの幅を埋める */
+  width: 100%;     /* 幅を確保 */
+}
+
+/* --- サイドバー内の要素 --- */
+
+/* ページタイトル (Projectsなど) */
+.sidebar-title {
+  margin-top: 0;
+  font-size: 32px;
+  margin-bottom: 10px; /* タイトルの下の余白 */
+  color: #333;
+}
+
+/* 1. 上部のアクションエリア (Back, Createボタンなどを囲むdiv) */
+.sidebar-actions {
+  margin-bottom: 30px; /* ★ここが重要：ボタン群とタグリストの間の余白 */
+}
+
+/* ボタンを並べるリストのスタイル (呼び出し元で ul を使う場合用) */
+.sidebar-action-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-action-list li {
+  margin-bottom: 10px;
+}
+
+/* 2. 下部のタグリストエリア */
+.sidebar-tags {
+  /* 必要ならここにスタイルを追加 */
+}
+
+.sidebar-tags-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #555;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 5px;
+}
+
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-link {
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+.tag-link.active {
+  background: #333;
+  color: #fff;
+}
+.tag-link.inactive {
+  background: #eee;
+  color: #555;
+}

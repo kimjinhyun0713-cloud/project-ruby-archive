@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "P00" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="P00">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= render "shared/head" %>
+    <%= yield :head %>    
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <script>
+      document.addEventListener("turbo:load", function() {
+        document.querySelectorAll('pre').forEach((block) => {
+          hljs.highlightElement(block);
+        });
+      });
+    </script>
+    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css](https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css)">
+  </head>
+
+  <body>
+    <%= render "shared/flash_msg" %>    
+    <%= yield %>    
+    <div id="back-to-top" style="display: none;">
+      Top
+    </div>
+    <style>
+      #back-to-top {
+        position: fixed;        /* 画面に固定 */
+        bottom:50px;           /* 下から30px */
+        right: 300px;            /* 右から30px */
+        z-index: 9999;          /* 他の要素より手前に表示 */        
+        width: 100px;
+        height: 50px;
+        background-color: #fff /* 背景色（黒系） */
+        color: #333;            /* 文字色（白） */
+        border: 2px solid #333;
+        text-align: center;
+        line-height: 50px;      /* 文字を縦中央に */
+        font-size: 24px;
+        font-weight: bold;
+        border-radius: 10px;     /* 丸くする */
+        cursor: pointer;        /* マウスを乗せた時に指マークに */
+        opacity: 0.8;           /* 少し透けさせる */
+        transition: opacity 0.3s, transform 0.3s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      }
+
+      /* ホバー時の動き */
+      #back-to-top:hover {
+        opacity: 1;
+        transform: translateY(-5px); /* 少し上に浮く */
+      }
+    </style>
+
+    <script>
+      document.addEventListener("turbo:load", setupBackToTop); // Rails (Turbo)用
+      document.addEventListener("DOMContentLoaded", setupBackToTop); // 通常用
+
+      function setupBackToTop() {
+        const button = document.getElementById("back-to-top");
+        if (!button) return;
+
+        // クリックしたら上に戻る処理
+        button.addEventListener("click", () => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth" // スルッと滑らかにスクロール
+          });
+        });
+
+        // スクロール量に合わせてボタンを表示/非表示
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 300) {
+            // 300px以上スクロールしたら表示
+            button.style.display = "block";
+          } else {
+            // それ以外は隠す
+            button.style.display = "none";
+          }
+        });
+      }
+    </script> 
+  </body>
+  <%= render "shared/admin" %>
+</html>

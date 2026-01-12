@@ -1,0 +1,87 @@
+<div class="form-container">
+
+  <h1 class="form-header-title">
+    <%= item.persisted? ? "Edit #{item.model_name.human}" : "New #{item.model_name.human}" %>
+  </h1>
+
+  <%= form_with(model: item, local: true) do |f| %>
+
+    <%# --- エラー表示 --- %>
+    <% if item.errors.any? %>
+      <div class="error-notification">
+        <h3><%= pluralize(item.errors.count, "error") %> prohibited this from being saved:</h3>
+        <ul>
+          <% item.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%# --- Title --- %>
+    <div class="form-group">
+      <%= f.label :title, class: "form-label" %>
+      <%= f.text_field :title, class: "form-input-text" %>
+    </div>
+
+    <%# --- Body (RichText) --- %>
+    <% body_attr = item.respond_to?(:content) ? :content : :body %>
+    
+    <div class="form-group">
+      <%= f.label body_attr, "Body", class: "form-label" %>
+      <%= f.rich_text_area body_attr, rows: 10, class: "trix-content" %>
+    </div>
+
+    <%# --- Image Upload --- %>
+    <div class="form-group">
+      <%= f.label :content_figures, "Images", class: "form-label" %>
+      
+      <div class="custom-file-upload">
+        <%# 1. 本物の入力欄（非表示） %>
+        <%= f.file_field :content_figures, multiple: true, id: "file-input", style: "display: none;", accept: 'image/jpeg,image/gif,image/png' %>
+        
+        <%# 2. デザインされたボタン（ラベル） %>
+        <label for="file-input" class="file-choose-btn">
+          Choose Files
+        </label>
+        
+        <%# 3. ファイル名表示エリア %>
+        <span id="file-name" class="file-status-text">
+          No files chosen
+        </span>
+      </div>
+      
+      <p class="file-hint">
+        ※ Hold down Ctrl (Windows) or Command (Mac) to select multiple files.
+      </p>
+    </div>
+
+    <%# --- Buttons --- %>
+    <div class="form-actions">
+      <%# Backボタン (中身は修正せずそのまま) %>
+      <%= btn_link_to "Back", item.class, color: "white", bg_color: "#000" %>
+      
+      <%# Createボタン (custom-btnクラスを適用してデザイン統一) %>
+      <%# submit-btn-styleで黒背景にしています %>
+      <%= f.submit "Create", class: "custom-btn", style: "background-color: #4CAF50; color: white;" %>            
+    </div>
+
+  <% end %>
+
+  <%# --- JavaScript (ファイル数カウント用) --- %>
+  <script>
+    document.getElementById('file-input').addEventListener('change', function(e) {
+      var files = e.target.files;
+      var fileNameSpan = document.getElementById('file-name');
+      
+      if (files.length > 1) {
+        fileNameSpan.textContent = files.length + " files selected";
+      } else if (files.length === 1) {
+        fileNameSpan.textContent = files[0].name;
+      } else {
+        fileNameSpan.textContent = "No files chosen";
+      }
+    });
+  </script>
+
+</div>      

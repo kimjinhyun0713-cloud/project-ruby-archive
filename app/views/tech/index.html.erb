@@ -1,0 +1,99 @@
+<%# ▼ ここで色を指定します！ ▼ %>
+<div class="research-container" style="--main-color: #DC143C;">
+  
+  <header class="research-header">
+    <h1>Programming & Technology</h1>
+    <p class="subtitle">Personal development log, Study</p>
+  </header>
+  <%# --- Bottom Navigation --- %>
+  <div class="section-bottom-nav">
+    <%= link_to root_path, class: "back-home-link" do %>
+      Back to kimuni's
+    <% end %>
+  </div>
+  <%# --- Section 1: Projects --- %>
+  <section class="content-section">
+    <h2 class="section-title">Projects</h2>
+    
+    <div class="software-grid">
+      
+      <%# Card 1 %>
+      <article class="software-card">
+        <h3>project-CSHMD</h3>
+        <p><strong>研究用自作パッケージ</strong></p>
+        <p style="font-size: 0.9em; color: #888;">目的：研究室の後輩向けにレガシーを残すため</p>
+        
+        <ul class="project-detail-list">
+          <li><strong>/cshmd:</strong> 汎用性の高いコードをまとめたパッケージ</li>
+          <li><strong>/tools:</strong> パッケージを用いて開発した実研究用ツール</li>
+        </ul>
+        
+        <div style="margin-bottom: 15px; text-align: center;">
+          <%# リンクの色も自動で変えたい場合は style="color: var(--main-color)..." と書きます %>
+          <%= link_to "Go to Tools description >", tools_path, style: "color: var(--main-color); font-weight: bold; text-decoration: underline;" %>
+        </div>
+
+        <a href="https://github.com/kimjinhyun0713-cloud/kimuni.git" target="_blank" class="github-link-btn">
+          View on GitHub
+        </a>
+      </article>
+
+      <%# Card 2 %>
+      <article class="software-card">
+        <h3>project-ruby-archive</h3>
+        <p><strong>本Webアプリ (Kimuni's)</strong></p>
+        <p style="font-size: 0.9em; color: #888;">目的：文章を見やすく整理・アーカイブ化</p>
+        
+        <ul class="project-detail-list">
+          <li>Tag検索機能、テキスト内移動リンク</li>
+          <li>LLMを導入した文章自動生成（予定）</li>
+        </ul>
+
+        <a href="https://github.com/kimjinhyun0713-cloud/kimuni.git" target="_blank" class="github-link-btn">
+          View on GitHub
+        </a>
+      </article>
+
+    </div>
+  </section>
+
+  <%# --- Section 2: Resources --- %>
+  <section class="content-section bg-light">
+    <h2 class="section-title" style="border-bottom-color: #ddd;">Resources</h2>
+    
+    <div class="resource-grid">
+      
+      <%# Resource 1 %>
+      <div class="resource-card">
+        <span class="resource-icon">🛠️</span>
+        <h4>Tools</h4>
+        <p class="resource-desc">
+          研究のために自作したツールの紹介・解説
+        </p>
+        <%= link_to "View Tools", tools_path, class: "resource-btn" %>
+      </div>
+
+      <%# Resource 2 %>
+      <div class="resource-card">
+        <span class="resource-icon">🚀</span>
+        <h4>Projects</h4>
+        <p class="resource-desc">
+          Projectの企画背景、開発コメントなど
+        </p>
+        <%= link_to "View Projects", projects_path, class: "resource-btn" %>
+      </div>
+
+      <%# Resource 3 %>
+      <div class="resource-card">
+        <span class="resource-icon">📝</span>
+        <h4>Posts</h4>
+        <p class="resource-desc">
+          日々の勉強内容の要約・学習記録
+        </p>
+        <%= link_to "View Posts", posts_path, class: "resource-btn" %>
+      </div>
+
+    </div>
+  </section>
+
+</div>

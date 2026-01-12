@@ -1,0 +1,98 @@
+<div class="research-container">
+  <header class="research-header">
+    <h1>機械学習による分子動力学シミュレーション</h1>
+    <p class="subtitle">C-S-Hの構造による炭酸塩の吸着挙動を解明</p>
+  </header>
+  <div class="section-bottom-nav">
+    <%= link_to root_path, class: "back-home-link" do %>
+      Back to kimuni's
+    <% end %>
+  </div>
+  <section class="content-section">
+    <h2 class="section-title">研究概要</h2>
+    <p>
+      私は分子の挙動をシミュレーションする分子動力学（MD, Molecular Dynamics）を専門としています。
+      セメント系材料であるC-S-Hの炭酸化反応を研究対象としており、シミュレーションの結果を統計的に解析することに取り組んでいます。
+      さらに、機械学習（ニューラルネットワーク）を用いてモデルを構築し、分子動力学への応用を進めています。
+    </p>
+  </section>
+
+  <section class="content-section">
+    <h2 class="section-title">研究目的</h2>
+    <p>
+      セメント系材料であるC-S-Hの炭酸化反応を研究対象としており、実験データを基に様々なC-S-H構造を作成。
+      炭酸イオンの吸着特性や、どの炭酸塩が形成されやすいかを解析しています。
+    </p>
+    <p>
+      <strong>本研究の目的は、セメントの二酸化炭素固定能力を評価し、カーボンニュートラルに貢献する情報を提供することです。</strong>
+    </p>
+    <p>
+      具体的には、二酸化炭素をより効率的に捕集できるセメント材料の選定に役立つデータを提示し、
+      さらに形成される炭酸塩の種類を明らかにすることで、セメントの再利用における指標を提示することを目指しています。
+    </p>
+  </section>
+
+  <section class="content-section bg-light">
+    <h2 class="section-title">分子動力学 (MD) とは？</h2>
+    <p>
+      原子や分子の動きをニュートン方程式に基づいて計算し、時間経過に伴う構造変化や性質をシミュレーションする手法。
+      実験では観測困難なナノスケールの現象や、極限環境下での物質の挙動を解明できます。
+    </p>
+  </section>
+
+  <section class="content-section">
+    <h2 class="section-title">Resources</h2>
+    
+    <div class="resource-grid">
+      
+      <div class="resource-card">
+        <div class="resource-icon">🛠️</div>
+        <h3>Tools</h3>
+        <p class="resource-desc">研究のために、自作したツールの紹介・解説</p>
+        <%= link_to "View Tools", tools_path, class: "resource-btn" %>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-icon">📝</div>
+        <h3>Notes</h3>
+        <p class="resource-desc">研究結果や工夫点を記録した研究ノート</p>
+        <%= link_to "View Notes", notes_path, class: "resource-btn" %>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-icon">📚</div>
+        <h3>Papers</h3>
+        <p class="resource-desc">C-S-H、MDなど研究に関する参考論文の要約</p>
+        <%= link_to "View Papers", papers_path, class: "resource-btn" %>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="content-section">
+    <h2 class="section-title">使用ソフトウェア</h2>
+    <div class="software-grid">
+      <div class="software-card">
+        <h3>LAMMPS</h3>
+        <p>大規模な原子・分子系の古典分子動力学シミュレーションを行うためのオープンソースコード。並列計算に優れ、金属、ポリマー、生体分子など幅広い材料科学分野で利用されています。</p>
+      </div>
+      <div class="software-card">
+        <h3>VASP</h3>
+        <p>密度汎関数法（DFT）に基づく第一原理計算ソフトウェア。電子状態を高精度に計算でき、未知の物質の結晶構造予測や電子物性の解析において世界的に標準とされているツールです。</p>
+      </div>
+      <div class="software-card">
+        <h3>VMD</h3>
+        <p>分子動力学シミュレーションの結果を可視化・解析するためのソフトウェア。タンパク質や材料の3D構造を動画として再生し、原子間の距離や角度、水素結合などを詳細に解析できます。</p>
+      </div>
+      <div class="software-card">
+        <h3>VESTA</h3>
+        <p>結晶構造や電子密度の3次元可視化プログラム。構造データの作成や編集が直感的に行え、論文やプレゼンテーション用の高品質な構造図を作成するために広く利用されています。</p>
+      </div>
+      <div class="software-card">
+        <h3>DeepMD-kit</h3>
+        <p>第一原理計算の精度と古典MDの計算効率を両立させる、機械学習ポテンシャルを作成するためのパッケージ。ニューラルネットワークを用いて原子間相互作用を学習させ、高速高精度な計算を実現します。</p>
+      </div>
+    </div>
+  </section>
+
+</div>

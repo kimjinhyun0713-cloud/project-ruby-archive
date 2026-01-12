@@ -1,0 +1,224 @@
+/* --- Research/Tech 共通スタイル --- */
+
+/* 全体のコンテナ */
+.research-container {
+  /* ★ ここで「基本の色（青）」を定義します ★ */
+  --main-color: #007bff; 
+
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", sans-serif;
+  color: #333;
+  line-height: 1.8;
+}
+
+/* ヘッダー */
+.research-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.research-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  color: #2c3e50;
+  font-weight: 800;
+}
+
+.subtitle {
+  color: var(--main-color); /* ★変数を使用 */
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* セクション共通 */
+.content-section {
+  margin-bottom: 60px;
+}
+
+.bg-light {
+  background-color: #fcfcfc;
+  border-left: 5px solid var(--main-color); /* ★変数を使用 */
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+/* ソフトウェア（Project）グリッド */
+.software-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.software-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.software-card h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: var(--main-color); /* ★変数を使用 */
+  margin-bottom: 15px;
+  border-bottom: 1px dashed #eee;
+  padding-bottom: 10px;
+}
+
+.software-card p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* GitHubリンクボタン */
+.github-link-btn {
+  display: inline-block;
+  margin-top: auto;
+  color: #333;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+  background: #f0f0f0;
+  padding: 8px 15px;
+  border-radius: 5px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.github-link-btn:hover {
+  background: #333;
+  color: #fff;
+}
+
+/* リスト（詳細項目用） */
+.project-detail-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.project-detail-list li {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 5px;
+  padding-left: 15px;
+  position: relative;
+}
+
+.project-detail-list li::before {
+  content: "•";
+  color: var(--main-color); /* ★変数を使用 */
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+/* リソースグリッド */
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.resource-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 15px;
+  padding: 30px 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.resource-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  /* ボーダー色も変数を薄くしたものを使いたい場合は opacity 等で調整できますが、
+     ここではシンプルに変数の色を適用します */
+  border-color: var(--main-color); 
+}
+
+.resource-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.resource-card h4 {
+  font-size: 1.2rem;
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.resource-desc {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 25px;
+  min-height: 3em;
+}
+
+/* ボタンのデザイン */
+.resource-btn {
+  display: inline-block;
+  padding: 10px 30px;
+  background-color: var(--main-color); /* ★変数を使用 */
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.resource-btn:hover {
+  /* 赤でも青でも、ホバー時は自動的に少し暗くする */
+  filter: brightness(0.85); 
+  transform: scale(1.05);
+  color: white;
+}
+
+/* 下部のナビゲーション */
+.section-bottom-nav {
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid #eee;
+  text-align: left;
+}
+
+.back-home-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 1.5rem;  
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 4px solid #333;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  padding: 10px 20px;
+}
+
+.back-home-link:hover {
+  color: #fff;
+  transform: translateX(-5px);
+  background-color: #333;
+}

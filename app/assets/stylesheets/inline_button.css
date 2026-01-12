@@ -1,0 +1,37 @@
+.custom-btn {
+  /* --- サイズと配置 --- */
+  display: inline-block;
+  width: 100px;             /* ★重要：横幅を300pxで固定 */
+  box-sizing: border-box;   /* paddingを含めて300pxにする設定 */
+  margin-bottom: 20px;
+  padding: 12px 0;          /* 上下の余白（左右は幅固定なので0でOK） */
+  
+  /* --- 文字の設定 --- */
+  text-align: center;       /* 文字をボタンの真ん中に */
+  text-decoration: none;
+  font-size: 16px;          /* 少し上品なサイズに調整 */
+  font-weight: bold;        /* 太字にしてボタンらしく */
+  line-height: 1.5;
+
+  /* --- 形と境界線 --- */
+  border-radius: 50px;      /* ★統一感：Researchページと同じ「丸いボタン」に */
+  border: 1px solid transparent; /* 枠線（必要な場合の色はhelper等で指定可） */
+
+  /* --- 色のデフォルト設定（指定がない場合は黒になります） --- */
+  background-color: #333;   /* デフォルト：黒系 */
+  color: #fff;              /* デフォルト：白文字 */
+
+  /* --- 動きの設定 --- */
+  transition: all 0.3s ease; /* 滑らかに変化 */
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* ほんのり影をつける */
+}
+
+/* --- ホバー時（マウスを乗せた時）の動き --- */
+.custom-btn:hover {
+  opacity: 0.9;                /* 少し透けさせる */
+  transform: translateY(-3px); /* ★統一感：少し上に浮き上がる */
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2); /* 影を濃くして浮遊感を出す */
+  text-decoration: none;       /* 下線は出さない */
+  color: #fff;                 /* 文字色は維持 */
+}

@@ -1,0 +1,59 @@
+<%# app/views/shared/_index.html.erb %>
+<%# 
+  呼び出し元から以下の変数を受け取ります:
+  - items: 表示するデータ一覧
+  - tags:  全タグリスト
+  - title: ページタイトル
+  - sidebar_content: (任意) サイドバーの上部に表示するHTML（ボタン等）
+%>
+
+<div class="index-layout">
+  
+  <%# --- 左側: サイドバー --- %>
+  <aside class="index-sidebar">
+    <h1 class="sidebar-title"><%= title %></h1>
+    
+    <%# 1. アクションボタンエリア %>
+    <% if local_assigns[:sidebar_content].present? %>
+      <div class="sidebar-actions">
+        <%= sidebar_content %>
+      </div>
+    <% end %>
+
+    <%# 2. タグ検索エリア %>
+    <div class="sidebar-tags">
+      <div class="sidebar-tags-title">Tags</div>
+      
+      <div style="margin-bottom: 10px;">
+        <%= link_to "Show All", url_for(action: :index, tag: nil, page: nil), style: "font-size: 0.9rem; color: #333; text-decoration: underline;" %>
+      </div>
+
+      <div class="tag-cloud">
+        <% tags.each do |tag| %>
+          <% is_active = (params[:tag] == tag.name) %>
+          <%= link_to url_for(action: :index, tag: tag.name), 
+              class: "tag-link #{is_active ? 'active' : 'inactive'}" do %>
+            #<%= tag.name %> <small>(<%= tag.count %>)</small>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </aside>
+
+  <%# --- 右側: メインリスト --- %>
+  <main class="index-main">
+    <% if items.any? %>
+      <%# データがある場合: リストを表示 %>
+      <%= render 'shared/items_list', items: items, show_content: true %>
+      
+    <% else %>
+      <%# データがない場合: 空の状態を表示 %>
+      <div style="background: #f9f9f9; padding: 40px; border-radius: 10px; text-align: center; color: #666;">
+        <p>No posts yet.</p>
+        <%# 一覧に戻るリンク %>
+        <%= link_to "Back to Home", root_path, style: "display: inline-block; margin-top: 10px; color: #333;" %>
+      </div>
+    <% end %>
+  </main>
+
+</div>

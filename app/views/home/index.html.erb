@@ -1,0 +1,89 @@
+<div class="dashboard-container">
+
+  <div class="home-intro-text">
+    This page is a personal archive and blog.
+    <br>
+    You can navigate to the Tech and Research pages using the buttons below.
+  </div>
+
+  <section class="dashboard-section">
+    <div class="news-header">
+      <h2 class="news-title"><%= local_assigns[:title] || "Updates" %></h2>
+      
+      <button id="show-btn" onclick="toggleNews(true)" class="toggle-btn">
+        Show ∨
+      </button>
+    </div>
+
+    <div id="hidden-news-list" style="display: none; margin-top: 20px;">
+      <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 15px;">
+      
+      <div class="news-list">
+        <ul>
+          <% @news_recent.each do |news|%>
+            <li>
+              <%= link_to news, class: "news-link" do %>          
+                <span style="color:#888; font-size:0.9em; margin-right:10px;">
+                  <%= news.created_at.strftime("%Y-%m-%d") %>
+                </span>
+                <%= news.title %>
+              <% end %>        
+            </li> 
+          <% end %>          
+        </ul>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        <div style="flex: 1;"></div> 
+        
+        <button id="hide-btn" onclick="toggleNews(false)" class="toggle-btn">
+          Hide ∧
+        </button>
+
+        <div style="flex: 1; text-align: right;">
+          <%= link_to "More >", @news_recent.first.class, class: "more-link" %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="section-header">
+      <h2 style="color: #DC143C;">Tech</h2>
+      <%= link_to "Go to Tech Top >", tech_index_path, class: "section-link-red" %>
+    </div>
+
+    <div class="summary-grid">
+      <%= render partial: "shared/summary_posts", locals: { title: "Projects", items: @project_recent, new_path: new_project_path } %>
+      <%= render partial: "shared/summary_posts", locals: { title: "Posts", items: @post_recent, new_path: new_post_path } %>
+    </div>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="section-header">
+      <h2 style="color: #007bff;">Research</h2>
+      <%= link_to "Go to Research Top >", research_index_path, class: "section-link-blue" %>
+    </div>
+
+    <div class="summary-grid">
+      <%= render partial: "shared/summary_posts", locals: { title: "Papers", items: @paper_recent, new_path: new_paper_path } %>
+      <%= render partial: "shared/summary_posts", locals: { title: "Notes", items: @note_recent, new_path: new_note_path } %>
+    </div>
+  </section>
+
+  <script>
+    function toggleNews(isShow) {
+      const list    = document.getElementById('hidden-news-list');
+      const showBtn = document.getElementById('show-btn');
+      
+      if (isShow) {
+        list.style.display = 'block';
+        showBtn.style.display = 'none';
+      } else {
+        list.style.display = 'none';
+        showBtn.style.display = 'block';
+      }
+    }
+  </script>
+
+</div>

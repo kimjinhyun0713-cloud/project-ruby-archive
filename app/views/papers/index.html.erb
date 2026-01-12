@@ -1,0 +1,17 @@
+<%# app/views/projects/index.html.erb %>
+<%= render 'shared/index', 
+    items: @papers, 
+    tags: @all_tags, 
+    # タイトルは動的な @search_title か、固定の "Projects" どちらでもOK
+    title: @search_title || "Projects",
+    # ↓ここでサイドバーに入れたいボタン等を渡す
+    sidebar_content: capture { %>
+      
+      <ul class="sidebar-action-list">
+        <li style="margin-bottom: 10px;">
+          <%= render partial: "shared/get_link", locals: { title: "Back", new_path: research_index_path, bg_color: "#000", color: "#fff" } %>
+          <%= render partial: "shared/get_link", locals: { title: "Create", new_path: new_paper_path, bg_color: "#4CAF50", color: "#fff" } %>
+        </li>
+      </ul>
+
+    <% } %>

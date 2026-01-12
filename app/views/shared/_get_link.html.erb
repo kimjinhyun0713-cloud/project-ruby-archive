@@ -1,0 +1,5 @@
+<% path = local_assigns[:new_path] || [:new, items.first.class] %>
+<% bg_color = local_assigns[:bg_color] || "#4CAF50" %>
+<% color = local_assigns[:color] || bg_color %>
+<% title = local_assigns[:title] || "Create New" %>
+<%= btn_link_to "#{title}", path, bg_color: bg_color, color: color %>

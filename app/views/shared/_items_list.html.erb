@@ -1,0 +1,58 @@
+<%# app/views/shared/_items_list.html.erb %>
+<%
+  # オプションで本文表示を切り替えられるようにする (デフォルトは true)
+  show_content = local_assigns.fetch(:show_content, true)
+%>
+
+<div class="items-list-container">
+  <% items.each do |item| %>
+    
+    <%# カード全体をリンクにする %>
+    <%= link_to item, class: "item-card" do %>
+
+      <h2 class="item-card-title">
+        <%= item.title %>
+      </h2>
+      
+      <p class="item-card-date">
+        <%= item.created_at.strftime('%Y.%m.%d') %>
+      </p>
+
+      <%# タグ表示 %>
+      <% if item.tag_list.present? %>
+        <div class="item-tags" style="margin-bottom: 12px;">
+          <% item.tag_list.each do |tag| %>
+            <span class="tag-label" style="background-color: #f0f0f0; color: #555; font-size: 0.85rem; padding: 4px 8px; border-radius: 4px; margin-right: 6px; display: inline-block;">
+              #<%= tag %>
+            </span>
+          <% end %>
+        </div>
+      <% end %>
+      
+      <%# 本文プレビュー %>
+      <% if show_content %>
+        <div class="item-card-body">
+          <% 
+             raw_text = item.respond_to?(:content) ? item.content : item.body
+             plain_text = raw_text.to_s.gsub(/<[^>]+>/, "").gsub(/\n/, "")
+          %>
+          <%= truncate(plain_text, length: 100) %>
+        </div>
+      <% end %>
+
+      <div class="item-card-body" data-controller="highlight">
+        <% 
+          raw_text = item.respond_to?(:content) ? item.content : item.body
+          # ... 省略 ...
+        %>
+      </div>
+
+
+    <% end %>
+
+  <% end %>
+  
+  <div class="pagination-container">
+    <%= paginate items %>
+  </div>
+</div>

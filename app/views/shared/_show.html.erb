@@ -1,0 +1,86 @@
+<% allow_delete = local_assigns.fetch(:allow_delete, true) %>
+
+  <h1 style="margin-top: 0; font-size: 1.8em; color: #333; text-align: center; margin-bottom: 25px; padding: 30px">
+    <%= "Post in #{item.model_name.human}" %>
+  </h1>
+
+<div style="
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  border: 1px solid #ddd;
+  max-width: 900px;
+  margin: 0 auto;
+">
+
+  <h1 style="margin-top: 0; font-size: 1.8em; color: #333;">
+    <%= item.title %>
+  </h1>
+  <p style="color: #888; margin-bottom: 20px;">
+    <small>Created at: <%= item.created_at.strftime('%Y/%m/%d %H:%M') %></small>
+  </p>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+  <div class="trix-content" style="line-height: 1.8; color: #444;">
+    <% if item.respond_to?(:content) && item.content.is_a?(ActionText::RichText) %>
+      <%# ActionTextの場合はそのまま表示 (simple_formatは使わない) %>
+      <%= item.content %>
+    <% else %>
+      <%# それ以外（通常のbodyなど）の場合は simple_format を使う %>
+      <% text = item.respond_to?(:content) ? item.content : item.body %>
+      <%= simple_format(text) %>
+    <% end %>
+  </div>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
+
+  <% if item.content_figures.attached? %>
+    <div style="margin: 20px 0; padding: 10px;">
+      <%# CSS Gridを使って写真をタイル状に配置します（配置を整える） %>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">
+        <% item.content_figures.each do |figure| %>
+          <div style="border: 1px solid #ccc; padding: 5px; text-align: center;">
+            <%# object-fit: cover で枠に合わせてトリミング表示（配置崩れを防ぐ） %>
+            <%= image_tag figure, style: "width: 100%; height: 200px; object-fit: cover;" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <hr>
+  <% end %>
+
+  <div style="display: flex; justify-content: center; gap: 15px;"> 
+
+    
+    <%
+      fallback_path = item.class
+      if request.referer.present? && request.referer.match?(/new|create|edit/)
+        back_path = fallback_path
+      else
+        back_path = request.referer || fallback_path
+      end
+    %>
+    
+    <%= btn_link_to "Back", back_path, bg_color: "#000", color: "#eee" %>      
+
+    <%       
+      edit_helper_name = "edit_#{item.model_name.singular_route_key}_path"
+    %>
+
+    <% if respond_to?(edit_helper_name) %>
+      <%= btn_link_to "Edit", [:edit, item], bg_color: "#007bff", color: "white" %>
+    <% end %>
+
+    <%# <%  
+      new_helper_name = "new_#{item.model_name.singular_route_key}_path"
+    %>
+    <%# <% if respond_to?(new_helper_name) %>
+      <%# <%= btn_link_to "Create", [:new, item], bg_color: "#4CAF50", color: "white" %> 
+    <%# <% end %> 
+
+    <% if allow_delete %>      
+      <%= btn_link_to "Delete", item, 
+        data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, 
+        bg_color: "#dc3545", color: "white"
+      %>
+    <% end %>
+  </div>
+</div>

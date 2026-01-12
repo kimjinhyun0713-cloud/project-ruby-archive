@@ -1,0 +1,25 @@
+<div class="summary-card">
+  <h2><%= local_assigns[:title] || "Updates" %></h2>
+  
+  <ul class="summary-list">
+    <% items.each do |item| %>
+      <li>
+        <%= link_to item, class: "summary-item-link" do %>
+          <%# タイトルのみ表示（必要であれば日付も復活可） %>
+          <%= item.title %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+  <div class="summary-footer">
+    <% if items.present? %>
+      <%= link_to "More >", items.first.class, class: "section-link-black" %>
+    <% else %>
+      <div style="text-align: center;">
+        <%= btn_link_to "Create", new_path, bg_color: "#4CAF50", color: "white", style: "text-decoration: none;" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

@@ -1,0 +1,35 @@
+<div style="
+  display: flex;            /* これで横並びになります */
+  align-items: flex-start;  /* 上端を揃える */
+  gap: -20px;                /* 左と右の間の隙間 */
+  max-width: 1000px;        /* 画面全体の幅制限 */
+  margin: 0 auto;           /* 画面中央寄せ */
+  padding: 40px 20px;       /* 全体の余白 */
+">
+
+  <div style="
+    width: 250px;           /* 左側の幅を250pxに固定 */
+    flex-shrink: 0;         /* 画面が狭くなってもこれ以上縮めない */
+  ">
+    <h1 style="margin-top: 0; font-size: 32px;">Updates</h1>
+  </div>
+
+  <div style="
+    flex-grow: 1;           /* 残りのスペースを埋める */
+    width: 100%;            /* 幅を確保 */
+  ">
+    <% if @news_list.any? %>
+      <%= render partial: "shared/index", locals: { items: @news_list, show_content: true } %>
+    <% else %>
+      <div style="
+        background: #f9f9f9; 
+        padding: 40px; 
+        border-radius: 10px; 
+        text-align: center; 
+        color: #666;
+      ">
+        <p>No posts yet.</p>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+<style>
+  /* Kaminariが生成するページネーションのコンテナ */
+  .pagination {
+    display: flex;
+    justify-content: center; /* 中央寄せ */
+    gap: 10px;               /* ボタン同士の間隔 */
+    list-style: none;        /* リストの点を消す */
+    padding: 0;
+  }
+
+  /* リンク（aタグ）と現在のページ（span）に対するスタイル */
+  .pagination a, 
+  .pagination span.current {
+    display: inline-block;   /* ★重要：これでpaddingが効くようになります */
+    padding: 10px 20px;      /* ★重要：ここがクリック範囲の広さになります */
+    border: 2px solid #999;  /* 枠線 */
+    border-radius: 8px;      /* 角丸 */
+    text-decoration: none;   /* 下線を消す */
+    color: #333;             /* 文字色 */
+    background-color: white;
+    transition: 0.3s;
+  }
+
+  /* ホバーしたとき（マウスを乗せたとき） */
+  .pagination a:hover {
+    background-color: #eee;
+    border-color: #666;
+  }
+
+  /* 「現在のページ」の見た目 */
+  .pagination span.current {
+    background-color: #333;
+    color: white;
+    border-color: #333;
+    pointer-events: none; /* 現在のページはクリックできないようにする */
+  }
+  
+  /* 「...」の見た目（gap/disabled） */
+  .pagination span.gap {
+    padding: 10px;
+  }
+</style>

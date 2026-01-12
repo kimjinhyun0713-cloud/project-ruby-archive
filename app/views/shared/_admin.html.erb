@@ -1,0 +1,73 @@
+<%# フッター部分 %>
+
+<style>
+  /* リンクの基本スタイル */
+  .footer-nav-link {
+    color: #333;
+    text-decoration: none;
+    font-size: 20px;       /* 文字サイズを大きく */
+    font-weight: bold;     /* 太字ではっきりさせる */
+    display: inline-block; /* アニメーションさせるためにブロック化 */
+    transition: all 0.3s ease; /* ふわっと動くための設定 */
+  }
+
+  /* カーソルを乗せた時の「宙に浮く」スタイル */
+  .footer-nav-link:hover {
+    transform: translateY(-5px); /* 上に5px浮き上がる */
+    color: #000;                 /* 色を少し濃く */
+    text-shadow: 0 5px 15px rgba(0,0,0,0.15); /* 影を落として浮遊感を出す */
+  }
+  
+  /* 区切り線のスタイル */
+  .footer-separator {
+    color: #ccc;
+    font-size: 20px;
+    margin-top: -2px; /* 位置の微調整 */
+  }
+</style>
+
+<footer style="
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto 40px; /* 上の余白を20pxに縮小 */
+  padding: 20px;
+  border-top: 1px solid #eaeaea;
+  text-align: center;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  box-sizing: border-box;
+">
+  
+  <%# --- ナビゲーションリンクエリア --- %>
+  <div style="
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px; /* リンク同士の間隔を少し広めに */
+    margin-bottom: 30px;
+    align-items: center;
+  ">
+    <span class="footer-separator">|</span>
+    <%= link_to "Home", root_path, class: "footer-nav-link" %>
+    <%= link_to "Posts", posts_path, class: "footer-nav-link" %>
+    <%= link_to "Projects", projects_path, class: "footer-nav-link" %>
+    <%= link_to "Tools", tools_path, class: "footer-nav-link" %>
+    <%= link_to "Notes", notes_path, class: "footer-nav-link" %>
+    <%= link_to "Papers", papers_path, class: "footer-nav-link" %>
+    
+    <span class="footer-separator">|</span>
+    <%= link_to "Research", research_index_path, class: "footer-nav-link" %>  
+    <%= link_to "Tech", tech_index_path, class: "footer-nav-link" %> 
+    <span class="footer-separator">|</span>
+  </div>
+
+  <%# --- 管理者情報エリア --- %>
+  <div style="
+    font-size: 12px;
+    color: #888;
+    line-height: 1.6;
+  ">
+    <p style="margin: 0;">Site admin: Kim jinhyun</p>
+    <p style="margin: 0;">Created using Ruby on Rails</p>
+  </div>
+  
+</footer>

@@ -1,0 +1,349 @@
+/* --- 全体のレイアウト --- */
+.dashboard-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #333;
+}
+
+/* --- 共通セクション (白い箱) --- */
+.dashboard-section {
+  background-color: #fff;
+  border: 1px solid #e0e0e0; /* 細いグレーの線 */
+  border-radius: 12px;       /* 角丸 */
+  padding: 30px;
+  margin-bottom: 40px;       /* セクション間の余白 */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* ほんのり影 */
+}
+
+/* --- セクションヘッダー (Tech, Research) --- */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+  color: #3823ae
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 2.0rem;
+  color: #333;
+  letter-spacing: 1px;
+}
+
+.section-link-black {
+    font-size: 1.0rem;  
+  color: #333;    
+  font-weight: bold;
+  border: 2px solid #333; 
+  
+  text-decoration: none;
+  padding: 5px 15px;
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+.section-link-black:hover {
+  background-color: #333; 
+  color: #ffffff;            
+}
+
+
+.section-link-blue {
+    font-size: 1.2rem;  
+  color: #007bff;    
+  font-weight: bold;
+  border: 4px solid #007bff; 
+  
+  text-decoration: none;
+  padding: 5px 15px;
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+.section-link-blue:hover {
+  background-color: #007bff; 
+  color: #ffffff;            
+}
+
+.section-link-red {
+    font-size: 1.2rem;  
+  color: #DC143C;    
+  font-weight: bold;
+  border: 4px solid #DC143C; 
+  
+  text-decoration: none;
+  padding: 5px 15px;
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+.section-link-red:hover {
+  background-color: #DC143C; 
+  color: #ffffff;            
+}
+
+
+
+/* --- 2カラムグリッド (左右に並べる用) --- */
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 1:1 で分割 */
+  gap: 30px; /* 間隔 */
+}
+
+/* スマホでは縦並びにする */
+@media (max-width: 768px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- News セクション固有のデザイン --- */
+.news-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.news-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0;
+  padding: -10px 0;
+}
+
+/* ボタン (Show/Hide 共通) */
+.toggle-btn {
+  background-color: #fff;
+  border: 4px solid #333;
+  color: #333;
+  padding: 5px 15px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+.toggle-btn:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* リストのデザイン */
+.news-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.news-list li {
+  border-bottom: 1px dashed #eee;
+}
+
+.news-link {
+  display: block;
+  text-decoration: none;
+  color: #555;
+  padding: 10px 5px;
+  transition: color 0.2s;
+}
+
+.news-link:hover {
+  color: #000;
+  background-color: #f9f9f9;
+}
+
+/* Moreリンク */
+.more-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+.more-link:hover {
+  text-decoration: underline;
+}
+
+/* --- Summary Card (Projects, Posts, Papers, Notes 共通) --- */
+
+.summary-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;       /* 他のカードと合わせた角丸 */
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  
+  /* レイアウト調整 */
+  width: 100%;               /* グリッドの枠いっぱいに広げる */
+  height: 100%;              /* 高さを揃える */
+  min-height: 250px;         /* 最低限の高さを確保 */
+  box-sizing: border-box;
+  
+  display: flex;             /* 中身を上下に整列させる */
+  flex-direction: column;    /* 縦並び */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* タイトルエリア */
+.summary-card h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  color: #333;
+  border-bottom: 2px solid #eee; /* hrタグの代わりにborderを使う */
+  padding-bottom: 10px;
+}
+
+/* リスト部分 */
+.summary-list {
+  list-style: none; /* ・を消す */
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;     /* 余白があればリストエリアを伸ばす */
+}
+
+.summary-list li {
+  border-bottom: 1px dashed #eee;
+}
+
+.summary-item-link {
+  display: block;
+  padding: 10px 5px;
+  text-decoration: none;
+  color: #555;
+  transition: color 0.2s, padding-left 0.2s;
+}
+
+.summary-item-link:hover {
+  color: #000;
+  background-color: #fafafa;
+  
+}
+
+/* フッター（MoreリンクやCreateボタン） */
+.summary-footer {
+  margin-top: 20px;
+  text-align: right; /* 右寄せ */
+}
+
+.more-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.more-link:hover {
+  background-color: #eee;
+}
+
+/* データがない時の Createボタン（共通ボタンのミニ版） */
+.create-btn-mini {
+  display: inline-block;
+  background-color: #333; /* 緑(#4CAF50)から黒(#333)へ統一 */
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: opacity 0.3s;
+}
+
+.create-btn-mini:hover {
+  opacity: 0.8;
+  color: #fff;
+}
+
+/* --- リスト全体のコンテナ --- */
+.items-list-container {
+  display: flex;
+  flex-direction: column; /* 縦並び */
+  gap: 20px;              /* カード間の隙間 */
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;         /* 中央寄せ */
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* --- 個別のアイテムカード (全体がリンク) --- */
+.item-card {
+  display: block;         /* ブロック要素として扱う */
+  text-decoration: none;  /* 下線を消す */
+  color: inherit;         /* 文字色を親に合わせる */
+  
+  background-color: #fff;
+  border: 1px solid #e0e0e0; /* 統一感：細いグレーの線 (#999から変更) */
+  border-radius: 12px;       /* 統一感：角丸 */
+  padding: 25px;             /* 余白を少し広めに */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* 統一感：薄い影 */
+  
+  box-sizing: border-box;
+  transition: background-color 0.2s, border-color 0.2s; /* 色だけ滑らかに変化 */
+}
+
+/* ★重要：
+   「マウスの動きで反応しないように」とのことなので、
+   transform (浮き上がる動き) は設定しません。
+   ただし、クリックできることがわかるように、
+   背景色だけほんの少し暗くするのが一般的です。
+*/
+.item-card:hover {
+  background-color: #fafafa; /* ホバー時にほんの少しグレーに */
+  border-color: #ccc;        /* 枠線を少し濃く */
+  color: inherit;            /* 文字色は変えない */
+}
+
+/* --- カードの中身 --- */
+.item-card-title {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333; /* 黒系 */
+}
+
+.item-card-date {
+  color: #888; /* グレー */
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.item-card-body {
+  color: #555; /* ダークグレー */
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* --- ページネーション周り --- */
+.pagination-container {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.home-intro-text {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;       /* 文字色 */
+  line-height: 1.8;  /* 行間を少し広げて読みやすく */
+  margin-bottom: 30px;
+}
+.index-menu {
+  display: flex;            /* これで横並びになります */
+  align-items: flex-start;  /* 上端を揃える */
+  gap: -20px;                /* 左と右の間の隙間 */
+  max-width: 1000px;        /* 画面全体の幅制限 */
+  margin: 0 auto;           /* 画面中央寄せ */
+  padding: 40px 20px;       /* 全体の余白 */
+  flex-shrink: 0; 
+}
