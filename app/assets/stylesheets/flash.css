@@ -1,0 +1,23 @@
+/* 通知エリア全体のスタイル */
+.flash-message {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* 成功時 (notice) - 緑色 */
+.flash-notice {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+/* 失敗時 (alert) - 赤色 */
+.flash-alert {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}

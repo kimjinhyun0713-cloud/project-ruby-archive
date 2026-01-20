@@ -69,18 +69,22 @@
       <%= btn_link_to "Edit", [:edit, item], bg_color: "#007bff", color: "white" %>
     <% end %>
 
-    <%# <%  
-      new_helper_name = "new_#{item.model_name.singular_route_key}_path"
-    %>
-    <%# <% if respond_to?(new_helper_name) %>
-      <%# <%= btn_link_to "Create", [:new, item], bg_color: "#4CAF50", color: "white" %> 
-    <%# <% end %> 
-
-    <% if allow_delete %>      
-      <%= btn_link_to "Delete", item, 
-        data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, 
-        bg_color: "#dc3545", color: "white"
-      %>
+    <% if allow_delete %>
+      <%# link_to では入力値を送信できないため、form_with に変更してスタイルを合わせます %>
+      <%= form_with url: url_for(item), method: :delete, local: true, style: "display:inline-block;" do |f| %>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <%= f.submit "Delete", 
+              class: "custom-btn", 
+              style: "background-color: #dc3545; color: white;",
+              data: { turbo_confirm: "Are you sure?" } 
+          %>
+          <%= password_field_tag :admin_password, nil, 
+              placeholder: "Password", 
+              required: true,               
+              style: "width: 100px; padding: 15px 5px ; border: 2px solid #dc3545; border-radius: 10px; font-size: 1rem; margin-bottom: 20px;" 
+          %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

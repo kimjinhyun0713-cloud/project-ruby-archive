@@ -1,0 +1,45 @@
+.text-anchor-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  
+  /* 文字色と背景色 */
+  color: #12e952;       /* 鮮やかな青 */
+  background-color: #d2d9d3; /* 薄い青背景 */
+  
+  /* 形状 */
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-decoration: none; /* 下線を消す */
+  font-weight: bold;
+  font-size: 0.9em;
+  
+  /* 枠線 */
+  border: 1px solid #bfdbfe;
+  transition: all 0.2s ease;
+}
+
+.text-anchor-link:hover {
+  background-color: #dbeafe; /* ホバー時に少し濃く */
+  transform: translateY(-5px); /* わずかに浮き上がる */
+  text-decoration: none;
+}
+
+/* --- 3. 移動先 (飛ばされる側) --- */
+.text-anchor-target {
+  /* 文字色と背景色（蛍光ペン風） */
+  background-color: #fe8a92; /* 黄色背景 */
+  color: #854d0e;            /* 茶色の文字 */
+  
+  /* 形状 */
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-family: monospace;    /* 数字を見やすく等幅フォントに */
+  
+  /* ヘッダー固定されている場合、スクロール位置がズレないように余白を作る設定 */
+  scroll-margin-top: 150px;  
+  
+  /* 少し目立たせるボーダー */
+  border-bottom: 2px solid #fe8a92;
+}

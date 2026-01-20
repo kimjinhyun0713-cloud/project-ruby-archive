@@ -29,13 +29,31 @@
           hljs.highlightElement(block);
         });
       });
-    </script>
-    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css](https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css)">
+    </script>    
   </head>
 
   <body>
-    <%= render "shared/flash_msg" %>    
-    <%= yield %>    
+    <% flash.each do |type, message| %>
+      <div class="flash-message flash-<%= type %>">
+        <%= message %>
+      </div>
+    <% end %>
+    <div class="main-content" style="padding: 20px;">
+      <%= yield %>
+    </div>
+
+    <div id="translator-widget" style="
+      position: fixed;       /* 画面に対して絶対位置で固定 */
+      top: 200px;             /* 上から20px */
+      right: 20px;           /* 右から20px */
+      z-index: 9999;         /* 他の要素より手前に表示 */
+      
+      /* 画面が小さくてもはみ出さないための保険 */
+      max-height: 90vh;      
+      overflow-y: auto;      
+    ">
+      <%= render "shared/translator_sidebar" %>
+    </div>
     <div id="back-to-top" style="display: none;">
       Top
     </div>

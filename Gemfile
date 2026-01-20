@@ -67,3 +67,5 @@ end
 
 gem "kaminari", "~> 1.2"
 gem 'acts-as-taggable-on', '~> 13.0.0'
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'ruby-openai'

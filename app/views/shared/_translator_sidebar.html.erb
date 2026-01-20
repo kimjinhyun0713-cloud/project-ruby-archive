@@ -1,0 +1,178 @@
+<% result ||= nil %>
+<% prompt ||= "" %>
+<%# コントローラーから渡されない場合、paramsから取得、それもなければデフォルト値 %>
+<% language ||= params[:language] || "japanese" %>
+<% persona ||= params[:persona] || "advisor" %> 
+<% theme_color = "#333" %>
+
+<style>
+  /* 閉じている時：Closeを隠してOpenを表示 */
+  details:not([open]) .toggle-text-close { display: none; }
+  details:not([open]) .toggle-text-open { display: inline; }
+  
+  /* 開いている時：Openを隠してCloseを表示 */
+  details[open] .toggle-text-open { display: none; }
+  details[open] .toggle-text-close { display: inline; }
+</style>
+
+<details id="ai-tool-sidebar" open style="position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; align-items: flex-end;">
+  
+  <summary style="
+    list-style: none; 
+    cursor: pointer; 
+    text-align: right; 
+    margin-bottom: 5px;
+    user-select: none;
+    outline: none;
+  ">
+    <span class="toggle-label" style="
+      background: <%= theme_color %>; 
+      color: white; 
+      padding: 8px 15px; 
+      border-radius: 20px; 
+      font-weight: bold; 
+      font-family: sans-serif;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      font-size: 0.9rem;
+    ">
+      <span class="toggle-text-open">Open AI Tool</span>
+      <span class="toggle-text-close">Close AI Tool</span>
+    </span>
+  </summary>
+
+  <%= turbo_frame_tag "translator_component" do %>
+    <div style="width: 400px;">
+      <div style="
+        background-color: #ffffff;
+        border: 4px solid <%= theme_color %>;
+        color: #333;
+        padding: 25px;
+        border-radius: 20px; 
+        font-family: 'Arial Rounded MT Bold', 'M PLUS Rounded 1c', sans-serif;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        max-height: 80vh; 
+        overflow-y: auto;
+      ">
+        
+        <div style="text-align: center; color: <%= theme_color %>; font-weight: bold; font-size: 1.5rem; margin-bottom: 15px;">
+          AI Text-Generator
+        </div>
+
+        <%= form_with url: translators_path, method: :post, data: { turbo: true } do |f| %>
+          
+          <%= f.text_area :prompt, value: prompt, rows: 4, style: "width:100%; box-sizing:border-box; border:2px solid #eee; border-radius:10px; padding: 10px; resize: vertical;", placeholder: "Enter text here..." %>
+          
+          <%= f.hidden_field :language, value: language %>
+          <%= f.hidden_field :persona, value: persona %>
+
+          <div style="margin-top: 15px;">
+            <label style="font-size: 0.8rem; font-weight: bold; color: #666;">Language of output</label>
+            <div style="display: flex; gap: 5px; margin-top: 5px;">
+              <% ["english", "japanese", "korean"].each do |lang| %>
+                <button type="button" 
+                  class="selection-btn" 
+                  onclick="updateSelection(this, 'language', '<%= lang %>', '<%= theme_color %>')"
+                  style="
+                    flex: 1; padding: 8px 0; border: 1px solid #ccc; border-radius: 8px; cursor: pointer; transition: 0.2s;
+                    background: <%= language == lang ? theme_color : 'white' %>;
+                    color: <%= language == lang ? 'white' : 'black' %>;
+                  ">
+                  <%= lang.capitalize %>
+                </button>
+              <% end %>
+            </div>
+          </div>
+
+          <div style="margin-top: 15px; margin-bottom: 20px;">
+            <label style="font-size: 0.8rem; font-weight: bold; color: #666;">Mode</label>
+            <div style="display: flex; gap: 5px; margin-top: 5px;">
+              <% ["writer", "advisor", "summary"].each do |p| %>
+                <button type="button" 
+                  class="selection-btn" 
+                  onclick="updateSelection(this, 'persona', '<%= p %>', '<%= theme_color %>')"
+                  style="
+                    flex: 1; padding: 8px 0; border: 1px solid #ccc; border-radius: 8px; cursor: pointer; transition: 0.2s;
+                    background: <%= persona == p ? theme_color : 'white' %>;
+                    color: <%= persona == p ? 'white' : 'black' %>;
+                  ">
+                  <%= p.capitalize %>
+                </button>
+              <% end %>
+            </div>
+          </div>
+
+          <button type="submit" 
+            onclick="this.innerText = 'Generating...'; this.style.opacity = '0.7';"
+            style="width:100%; background:<%= theme_color %>; color:white; border:none; padding:12px; border-radius:10px; cursor:pointer; font-weight: bold; font-size: 1rem;">
+            Generate
+          </button>
+
+        <% end %>
+
+        <div style="margin-top: 20px;">
+          <label style="font-size: 0.8rem; font-weight: bold; color: #666;">Output</label>
+          <div style="margin-top: 5px; background: #f9f9f9; padding: 15px; border-radius: 10px; min-height: 80px; white-space: pre-wrap; font-size: 0.9rem; border: 1px solid #eee;">
+            <%= result.presence || raw('<span style="color:#ccc">The result will appear here.</span>') %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <% end %>
+
+</details>
+
+<script>
+  // --- 1. ボタン選択の制御用関数 ---
+  function updateSelection(clickedButton, fieldName, value, activeColor) {
+    const form = clickedButton.closest('form');
+    const hiddenField = form.querySelector(`input[name="${fieldName}"]`);
+    if (hiddenField) hiddenField.value = value;
+
+    const siblings = clickedButton.parentNode.querySelectorAll('button');
+    siblings.forEach(btn => {
+      btn.style.background = 'white';
+      btn.style.color = 'black';
+    });
+
+    clickedButton.style.background = activeColor;
+    clickedButton.style.color = 'white';
+  }
+
+  // --- 2. 開閉状態の保存・復元ロジック (今回追加) ---
+  (function() {
+    const STORAGE_KEY = 'ai_sidebar_open_state';
+    const SIDEBAR_ID = 'ai-tool-sidebar';
+
+    function initSidebarState() {
+      const details = document.getElementById(SIDEBAR_ID);
+      if (!details) return;
+
+      // A. 保存された状態を読み込んで適用
+      const savedState = localStorage.getItem(STORAGE_KEY);
+      
+      if (savedState === 'closed') {
+        details.removeAttribute('open'); // 閉じる
+      } else {
+        // 'open' または 未設定の場合は開く (HTMLのデフォルトがopenなので、明示的に閉じなければ開く)
+        if (!details.hasAttribute('open')) {
+          details.setAttribute('open', '');
+        }
+      }
+
+      // B. 開閉イベントを監視して保存
+      // 重複登録を防ぐため、一度removeしてからaddします
+      details.removeEventListener('toggle', handleToggle);
+      details.addEventListener('toggle', handleToggle);
+    }
+
+    function handleToggle(event) {
+      const isOpen = event.target.open;
+      localStorage.setItem(STORAGE_KEY, isOpen ? 'open' : 'closed');
+    }
+
+    // Turbo Drive (ページ遷移) と 初回読み込みの両方に対応
+    document.addEventListener('turbo:load', initSidebarState);
+    document.addEventListener('DOMContentLoaded', initSidebarState);
+  })();
+</script>

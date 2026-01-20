@@ -13,5 +13,6 @@ Rails.application.routes.draw do
     get "/", to: "research#index", as: :research_index
     resources :notes
     resources :papers
+  resources :translators, only: [:index, :create]
   end
 end

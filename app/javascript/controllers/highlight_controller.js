@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import hljs from "highlight.js"
+import hljs from "highlight.js/lib/common"
 
 // 必要な言語だけを読み込むことで軽量化できます（下記は一例）
 // import ruby from "highlight.js/lib/languages/ruby"

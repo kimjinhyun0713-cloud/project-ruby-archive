@@ -25,6 +25,14 @@ class NotesController < ApplicationController
     # フォームから送られてきたデータ(post_params)でインスタンスを作る
     @note = Note.new(note_params)
 
+    unless check_password_match?
+      puts "[DEBUG] Doesnt match"
+      flash.now[:alert] = "Password incorrect. Cannot create."
+      # パスワード不一致なら保存せず、入力画面に戻す
+      render :new, status: :unprocessable_entity
+      return # ここで処理を終了
+    end
+
     if @note.save
       # 成功したら詳細画面へリダイレクトし、メッセージを出す
       redirect_to @note, notice: "Created successfully!"
@@ -36,14 +44,19 @@ class NotesController < ApplicationController
 
   def update
     if @note.update(note_params)
-      redirect_to @notes, notice: "Updated successfully!"
+      redirect_to @note, notice: "Updated successfully!"
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
+    unless check_password_match?
+      redirect_to @note, alert: "Password incorrect. Cannot delete."
+      return
+    end
     @note.destroy
+
     redirect_to notes_path, notice: "Deleted successfully!", status: :see_other
   end
 

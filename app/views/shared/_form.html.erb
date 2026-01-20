@@ -56,6 +56,12 @@
       </p>
     </div>
 
+    <div class="form-group" style="margin-top: 30px; border-top: 1px dashed #ccc; padding-top: 20px;">
+      <label class="form-label" style="color: #d9534f;">Admin Password (Required)</label>
+      <%# モデルに保存しないため、f.password_field ではなく password_field_tag を使用 %>
+      <%= password_field_tag :admin_password, nil, class: "form-input-text", placeholder: "Enter password to save", required: true %>
+    </div>
+
     <%# --- Buttons --- %>
     <div class="form-actions">
       <%# Backボタン (中身は修正せずそのまま) %>

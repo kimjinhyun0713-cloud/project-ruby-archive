@@ -27,16 +27,17 @@
       <div style="margin-bottom: 10px;">
         <%= link_to "Show All", url_for(action: :index, tag: nil, page: nil), style: "font-size: 0.9rem; color: #333; text-decoration: underline;" %>
       </div>
-
-      <div class="tag-cloud">
-        <% tags.each do |tag| %>
-          <% is_active = (params[:tag] == tag.name) %>
-          <%= link_to url_for(action: :index, tag: tag.name), 
-              class: "tag-link #{is_active ? 'active' : 'inactive'}" do %>
-            #<%= tag.name %> <small>(<%= tag.count %>)</small>
+      <% if tags.present? %>
+        <div class="tag-cloud">
+          <% tags.each do |tag| %>
+            <% is_active = (params[:tag] == tag.name) %>
+            <%= link_to url_for(action: :index, tag: tag.name), 
+                class: "tag-link #{is_active ? 'active' : 'inactive'}" do %>
+              #<%= tag.name %> <small>(<%= tag.count %>)</small>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
   </aside>
 

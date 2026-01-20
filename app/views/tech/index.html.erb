@@ -20,17 +20,16 @@
       <%# Card 1 %>
       <article class="software-card">
         <h3>project-CSHMD</h3>
-        <p><strong>研究用自作パッケージ</strong></p>
-        <p style="font-size: 0.9em; color: #888;">目的：研究室の後輩向けにレガシーを残すため</p>
-        
+        <p><strong>研究の効率化のために自作したパッケージ＆ツール</strong></p>        
+        <strong>/cshmd:</strong> 汎用性の高いコードをまとめたパッケージ
+        <strong>/tools:</strong> パッケージを用いて開発した実研究用ツール
         <ul class="project-detail-list">
-          <li><strong>/cshmd:</strong> 汎用性の高いコードをまとめたパッケージ</li>
-          <li><strong>/tools:</strong> パッケージを用いて開発した実研究用ツール</li>
+          <li>プロセスの自動化</li>
+          <li>結果解析・可視化</li>
         </ul>
         
-        <div style="margin-bottom: 15px; text-align: center;">
-          <%# リンクの色も自動で変えたい場合は style="color: var(--main-color)..." と書きます %>
-          <%= link_to "Go to Tools description >", tools_path, style: "color: var(--main-color); font-weight: bold; text-decoration: underline;" %>
+        <div style="margin-bottom: 15px; text-align: center;">          
+          <%= link_to "Go to Tools description >", tools_path, style: "color: var(--main-color); font-weight: bold; font-size: 1.2em;" %>
         </div>
 
         <a href="https://github.com/kimjinhyun0713-cloud/kimuni.git" target="_blank" class="github-link-btn">
@@ -42,14 +41,15 @@
       <article class="software-card">
         <h3>project-ruby-archive</h3>
         <p><strong>本Webアプリ (Kimuni's)</strong></p>
-        <p style="font-size: 0.9em; color: #888;">目的：文章を見やすく整理・アーカイブ化</p>
+        <p style="font-size: 0.9em; color: #888;">研究や勉強のプロセスを記録するための便利なインターフェースを提供するサイトを開発</p>
         
         <ul class="project-detail-list">
-          <li>Tag検索機能、テキスト内移動リンク</li>
-          <li>LLMを導入した文章自動生成（予定）</li>
+          <li>Tag作成＆検索機能、テキスト内移動リンク</li>
+          <li>openAiのapiを導入した、文章自動生成AI</li>
+          <li>openAiのapiを導入した、投稿時の要約文作成</li>
         </ul>
 
-        <a href="https://github.com/kimjinhyun0713-cloud/kimuni.git" target="_blank" class="github-link-btn">
+        <a href=https://github.com/kimjinhyun0713-cloud/project-ruby-archive target="_blank" class="github-link-btn">
           View on GitHub
         </a>
       </article>
@@ -58,37 +58,37 @@
   </section>
 
   <%# --- Section 2: Resources --- %>
-  <section class="content-section bg-light">
-    <h2 class="section-title" style="border-bottom-color: #ddd;">Resources</h2>
+  <section class="content-section">
+    <h2 class="section-title" style="border-bottom-color: #ddd;">Posts</h2>
     
     <div class="resource-grid">
       
       <%# Resource 1 %>
       <div class="resource-card">
-        <span class="resource-icon">🛠️</span>
-        <h4>Tools</h4>
+        <span class="resource-icon"></span>
+        <h2>Tools</h2>
         <p class="resource-desc">
-          研究のために自作したツールの紹介・解説
+          大学での研究の効率を向上させるために自作したツールの紹介・解説
         </p>
         <%= link_to "View Tools", tools_path, class: "resource-btn" %>
       </div>
 
       <%# Resource 2 %>
       <div class="resource-card">
-        <span class="resource-icon">🚀</span>
-        <h4>Projects</h4>
+        <span class="resource-icon"></span>
+        <h2>Projects</h2>
         <p class="resource-desc">
-          Projectの企画背景、開発コメントなど
+          開発の背景や開発に関するコメントを投稿
         </p>
         <%= link_to "View Projects", projects_path, class: "resource-btn" %>
       </div>
 
       <%# Resource 3 %>
       <div class="resource-card">
-        <span class="resource-icon">📝</span>
-        <h4>Posts</h4>
+        <span class="resource-icon"></span>
+        <h2>Posts</h2>
         <p class="resource-desc">
-          日々の勉強内容の要約・学習記録
+          日々の勉強内容を要約し、記録を作成
         </p>
         <%= link_to "View Posts", posts_path, class: "resource-btn" %>
       </div>

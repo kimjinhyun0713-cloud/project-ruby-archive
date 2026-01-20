@@ -27,7 +27,12 @@ class PostsController < ApplicationController
   def create
     # フォームから送られてきたデータ(post_params)でインスタンスを作る
     @post = Post.new(post_params)
-
+    unless check_password_match?
+      flash.now[:alert] = "Password incorrect. Cannot create."
+      # パスワード不一致なら保存せず、入力画面に戻す
+      render :new, status: :unprocessable_entity
+      return # ここで処理を終了
+    end
     if @post.save
       # 成功したら詳細画面へリダイレクトし、メッセージを出す
       redirect_to @post, notice: "Created successfully!" 
@@ -49,6 +54,10 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1
   def destroy
+    unless check_password_match?
+      redirect_to @post, alert: "Password incorrect. Cannot delete."
+      return
+    end
     @post.destroy
     redirect_to posts_path, notice: "Deleted successfully!", status: :see_other
   end

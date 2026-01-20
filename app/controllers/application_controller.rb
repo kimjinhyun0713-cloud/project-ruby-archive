@@ -3,9 +3,13 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
-
+  helper_method :check_password_match?
+  
   private
-
+  def check_password_match?
+    params[:admin_password] == ENV["ADMIN_PASSWORD"]
+  end
+  
   def paginate_item(resource)
     resource.page(params[:page]).per(5)
   end
@@ -25,9 +29,9 @@ class ApplicationController < ActionController::Base
 
     # 3. ビュー表示用のタイトル設定
     @search_title = if params[:tag].present?
-                      "##{params[:tag]} の検索結果"
+                      "Search results: # #{params[:tag]}"
                     else
-                      "すべての#{model_class.model_name.human}" # モデルの日本語名などを表示
+                      "All #{model_class.model_name.human}"
                     end
 
     # 4. サイドバー用の全タグ一覧取得

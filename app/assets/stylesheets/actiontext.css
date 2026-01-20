@@ -475,7 +475,7 @@ trix-editor img {
 
 /* Trixエディタのツールバーを固定する設定 */
 trix-toolbar {
-  position: sticky; /* スクロールに合わせて追従させる */
+  position: sticky;
   top: 0;           /* 画面の一番上に固定 (ヘッダーがある場合は数値を調整) */
   z-index: 100;     /* 他の要素より手前に表示 */
   

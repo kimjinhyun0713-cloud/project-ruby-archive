@@ -20,6 +20,13 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
 
+    unless check_password_match?
+      flash.now[:alert] = "Password incorrect. Cannot create."
+      # パスワード不一致なら保存せず、入力画面に戻す
+      render :new, status: :unprocessable_entity
+      return # ここで処理を終了
+    end
+
     if @project.save
       redirect_to @project, notice: "Created successfully!"
     else
@@ -35,7 +42,11 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def destroy
+  def destroy    
+    unless check_password_match?
+      redirect_to @project, alert: "Password incorrect. Cannot delete."
+      return
+    end
     @project.destroy
     redirect_to projects_path, notice: "Deleted successfully!", status: :see_other
   end

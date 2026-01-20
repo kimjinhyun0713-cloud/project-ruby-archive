@@ -1,11 +1,15 @@
 class NewsController < ApplicationController
   def index
-    @title = "Updates"
-    @news_list = News.all.order(created_at: :desc)
-    @news_list = paginate_item(@news_list)
+    #set_tag_search_data(News)
+    @news_list = paginate_item(News.all.order(created_at: :desc))
+    
   end
 
   def show
     @news = News.find(params[:id])
+  end
+
+  def news_list
+    @news_list
   end
 end
