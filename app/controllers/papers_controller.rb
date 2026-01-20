@@ -33,7 +33,7 @@ class PapersController < ApplicationController
     end
     if @paper.save
       # 成功したら詳細画面へリダイレクトし、メッセージを出す
-      redirect_to @paper, notice: "Created successfully!" 
+      redirect_to @paper, notice: "Created successfully!"
     else
       # 失敗したら、入力内容を保持したまま「新規作成画面」に戻す
       render :new, status: :unprocessable_entity

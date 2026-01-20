@@ -1,7 +1,7 @@
 class GenerateContentSummaryJob < ApplicationJob
   queue_as :default
 
-  def perform(record_id, model_class_name)    
+  def perform(record_id, model_class_name)
     model_class = model_class_name.constantize
     record = model_class.find_by(id: record_id)
     return unless record
@@ -11,7 +11,7 @@ class GenerateContentSummaryJob < ApplicationJob
     clean_content = record.content.to_s.dup
     client = OpenaiClient.new
     summary = client.content_summary(clean_content, language: "japanese")
-    
+
     return if summary.blank?
 
     current_content = record.reload.content.to_s

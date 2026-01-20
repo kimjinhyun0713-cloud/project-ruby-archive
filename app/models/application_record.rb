@@ -13,7 +13,7 @@ class ApplicationRecord < ActiveRecord::Base
   def self.enable_hashtag_extraction
     acts_as_taggable_on :tags
     before_save :extract_tags_from_body
-    
+
     # 保存完了後にAI要約ジョブを予約
     after_save_commit :enqueue_summary_job, if: -> { saved_change_to_content? }
   end
@@ -34,13 +34,13 @@ class ApplicationRecord < ActiveRecord::Base
     # 1. リンク処理
     processed_content = processed_content.gsub(/@\s*(\d+)@\s*@/) do
       num = $1
-      %{<a href="#anchor-#{num}" class="js-scroll-anchor" style="cursor: pointer;"> -> #{num}</a>}
+      %(<a href="#anchor-#{num}" class="js-scroll-anchor" style="cursor: pointer;"> -> #{num}</a>)
     end
 
     # 2. アンカー処理
     processed_content = processed_content.gsub(/@\s*(\d+)\s*@/) do
       num = $1
-      %{<span id="anchor-#{num}" class="text-anchor-target" style="background-color: #fff0f0;">[#{num}]</span>}
+      %(<span id="anchor-#{num}" class="text-anchor-target" style="background-color: #fff0f0;">[#{num}]</span>)
     end
 
     # 3. タグ抽出

@@ -7,12 +7,12 @@ Rails.application.routes.draw do
     resources :projects
     resources :tools
   end
-  
+
   resources :news, only: [ :index, :show ]
   scope path: "research" do
     get "/", to: "research#index", as: :research_index
     resources :notes
     resources :papers
-  resources :translators, only: [:index, :create]
+  resources :translators, only: [ :index, :create ]
   end
 end

@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy ]  
+  before_action :set_project, only: %i[ show edit update destroy ]
   # GET /projects or /projects.json
   def index
     set_tag_search_data(Project)
@@ -7,7 +7,6 @@ class ProjectsController < ApplicationController
   end
 
   def show
-
   end
 
   def new
@@ -42,7 +41,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def destroy    
+  def destroy
     unless check_password_match?
       redirect_to @project, alert: "Password incorrect. Cannot delete."
       return

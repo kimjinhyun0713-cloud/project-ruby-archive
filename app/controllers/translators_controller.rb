@@ -10,11 +10,11 @@ class TranslatorsController < ApplicationController
 
     client = OpenaiClient.new
     result = client.generate_text(prompt, language: language, persona: persona)
-    
+
     # render partial を使い、部品だけを更新して返す
-    render partial: "shared/translator_sidebar", locals: { 
-      result: result, 
-      prompt: prompt, 
+    render partial: "shared/translator_sidebar", locals: {
+      result: result,
+      prompt: prompt,
       language: language,
       persona: persona
     }

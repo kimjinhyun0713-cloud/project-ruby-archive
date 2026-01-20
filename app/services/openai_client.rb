@@ -77,11 +77,11 @@ class OpenaiClient
           { role: "user", content: user_input_message }
         ],
         # ペルソナごとのパラメータを適用
-        temperature: settings[:temperature], 
+        temperature: settings[:temperature],
         max_tokens: settings[:max_tokens]
       }
     )
-    
+
     response.dig("choices", 0, "message", "content")
   end
 

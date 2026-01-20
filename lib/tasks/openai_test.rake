@@ -8,10 +8,10 @@ namespace :openai do
       # サービスの呼び出し
       client = OpenaiClient.new
       start_time = Time.now
-      
+
       # テスト用の質問
       result = client.generate_text("Railsエンジニアに一言励ましの言葉をください。")
-      
+
       duration = (Time.now - start_time).round(2)
 
       puts "----------------------------------------"
@@ -31,7 +31,7 @@ namespace :openai do
 
   desc "単語リストから完璧な文章を作るテスト"
   task sentence: :environment do
-    input = "同一性：identity -> 同じaddress 等価性：equality -> valueが同じ interning：等価なimmutable objectを一つだけ維持する。"  
+    input = "同一性：identity -> 同じaddress 等価性：equality -> valueが同じ interning：等価なimmutable objectを一つだけ維持する。"
     puts "📡 文章生成を開始します..."
     puts "入力単語: #{input}"
     result = make_sentence_in_rake(input)
@@ -46,8 +46,8 @@ namespace :openai do
   def make_sentence_in_rake(input_sentence)
     # 【重要】ここではServiceクラスではなく、直接Gemのクライアントを使う
     # (もしくは OpenaiClientに attr_reader :client が必要)
-    client = OpenAI::Client.new(access_token: ENV['OPENAI_ACCESS_TOKEN'])
-    
+    client = OpenAI::Client.new(access_token: ENV["OPENAI_ACCESS_TOKEN"])
+
     prompt = <<~TEXT
       以下のinputをすべて使用して、文脈が通る自然で完璧な日本語の文章を作成してください。
       単語の順番は入れ替えても構いません。助詞（て・に・を・は）は適切に補ってください。
@@ -57,15 +57,15 @@ namespace :openai do
 
     response = client.chat(
       parameters: {
-        model: "gpt-4o-mini", 
+        model: "gpt-4o-mini",
         messages: [
           { role: "system", content: "あなたはプロのライターです。..." },
           { role: "user", content: prompt }
         ],
-        temperature: 0.3, 
+        temperature: 0.3
       }
     )
-    
+
     response.dig("choices", 0, "message", "content")
   end
 end

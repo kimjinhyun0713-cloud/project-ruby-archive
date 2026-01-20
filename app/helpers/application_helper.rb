@@ -1,6 +1,5 @@
 module ApplicationHelper
-  def btn_link_to(title, path, bg_color: '#999', color: '#000', **kwargs)
-
+  def btn_link_to(title, path, bg_color: "#999", color: "#000", **kwargs)
     style_option = "background-color: #{bg_color};"
     style_option += "color: #{color};"
 

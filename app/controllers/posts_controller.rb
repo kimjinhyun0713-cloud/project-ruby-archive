@@ -35,7 +35,7 @@ class PostsController < ApplicationController
     end
     if @post.save
       # 成功したら詳細画面へリダイレクトし、メッセージを出す
-      redirect_to @post, notice: "Created successfully!" 
+      redirect_to @post, notice: "Created successfully!"
       Rails.logger.debug "!!!#{@post.content_figures}!!!!!!"
     else
       # 失敗したら、入力内容を保持したまま「新規作成画面」に戻す
@@ -70,5 +70,4 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :content, content_figures: [])
     end
-    
 end

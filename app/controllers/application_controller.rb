@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
     @items = paginate_item(base_query)
 
-    @search_title = 
+    @search_title =
       if params[:tag].present?
         "Search results: # #{params[:tag]}"
       else
