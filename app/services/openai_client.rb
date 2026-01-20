@@ -1,6 +1,6 @@
 # app/services/openai_client.rb
 class OpenaiClient
-  require 'openai'
+  require "openai"
 
   # 言語設定
   LANGUAGE_LABELS = {
@@ -17,10 +17,9 @@ class OpenaiClient
         必ず%{language}で作成してください。
         あなたはプロのライター兼編集者です。
         Websiteや新聞記事に載せされるように文章を書き直します。
-        ユーザーから渡されたテキスト（input）に対して、以下のルールで処理を行い、結果のみを出力してください。        
-        【処理ルール】
+        ユーザーから渡されたテキスト（input）に対して、以下のルールで処理を行い、結果のみを出力してください。
         1. 文法を修正し、論理的に破綻がないようリライトしてください。
-        2. 単語の羅列の場合、それらを全て使用し、文脈が通る自然で完璧な文章を作成してください。        
+        2. 単語の羅列の場合、それらを全て使用し、文脈が通る自然で完璧な文章を作成してください。
         【制約】
         - 丁寧な敬語（です・ます調）で出力すること。
         - 余計な前置きは不要です。
@@ -46,7 +45,7 @@ class OpenaiClient
       max_tokens: 500,  # アドバイスは詳細な方が良いため長めに
       instruction: <<~TEXT
         必ず%{language}で作成してください。
-        あなたは経験豊富で親身なメンター・アドバイザーです。        
+        あなたは経験豊富で親身なメンター・アドバイザーです。
         ユーザーから渡された悩みや相談（input）に対して、具体的かつ前向きなアドバイスをしてください。
         【行動指針】
         - ユーザーの感情に寄り添い、共感を示してください。
@@ -57,7 +56,7 @@ class OpenaiClient
   }.freeze
 
   def initialize
-    @client = OpenAI::Client.new(access_token: ENV['OPENAI_ACCESS_TOKEN'])
+    @client = OpenAI::Client.new(access_token: ENV["OPENAI_ACCESS_TOKEN"])
   end
 
   # persona引数を追加（デフォルトはwriter）
