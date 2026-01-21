@@ -7,4 +7,5 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.esm.js"
-pin "highlight.js/lib/common", to: "highlight.js--lib--common.js" # @11.11.1
+# pin "highlight.js/lib/common", to: "highlight.js--lib--common.js" # @11.11.1
+pin "highlight.js/lib/common", to: "https://esm.sh/highlight.js@11.11.1/lib/common?bundle"
