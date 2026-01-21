@@ -24,9 +24,21 @@ test:
 # Store production database in the storage/ directory, which by default
 # is mounted as a persistent Docker volume in config/deploy.yml.
 production:
-  <<: *default
-  # Render.comなどの環境変数 DATABASE_URL を使う設定
-  # url: <%= ENV["DATABASE_URL"] %>  # Railsはこれを自動検知しますが、adapter指定は必要です
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
+  primary: &primary_production
+    <<: *default
+    # Render.comの環境変数 DATABASE_URL を使う
+    url: <%= ENV["DATABASE_URL"] %>
+    adapter: postgresql
+    encoding: unicode
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+  # Cache, Queue, Cable もすべて同じデータベース(primary)を使うように設定
+  cache:
+    <<: *primary_production
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    migrations_paths: db/cable_migrate
