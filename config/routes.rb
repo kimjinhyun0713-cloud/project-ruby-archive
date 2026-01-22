@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :tools
   end
 
-  resources :news, only: [ :index, :show ]
+  resources :news
   scope path: "research" do
     get "/", to: "research#index", as: :research_index
     resources :notes
