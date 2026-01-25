@@ -80,7 +80,7 @@ class CreateSolidQueueTables < ActiveRecord::Migration[7.1]
       t.integer :value, default: 1, null: false
       t.datetime :expires_at, null: false, index: true
       t.datetime :created_at, null: false
-      t.datetime :updated_at, null: falses
+      t.datetime :updated_at, null: false
     end
   end
 end
