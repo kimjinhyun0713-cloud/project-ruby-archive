@@ -1,5 +1,7 @@
 class AddSolidQueueRecurringTasks < ActiveRecord::Migration[7.1]
   def change
+    drop_table :solid_queue_recurring_tasks, if_exists: true
+
     create_table :solid_queue_recurring_tasks do |t|
       t.string :key, null: false
       t.string :schedule, null: false
