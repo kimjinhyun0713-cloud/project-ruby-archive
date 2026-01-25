@@ -32,13 +32,13 @@ class ApplicationRecord < ActiveRecord::Base
     found_tags = []
 
     # 1. リンク処理
-    processed_content = processed_content.gsub(/@\s*(\d+)@\s*@/) do
+    processed_content = processed_content.gsub(/@\s(\d+)@\s@/) do
       num = $1
       %(<a href="#anchor-#{num}" class="js-scroll-anchor" style="cursor: pointer;"> -> #{num}</a>)
     end
 
     # 2. アンカー処理
-    processed_content = processed_content.gsub(/@\s*(\d+)\s*@/) do
+    processed_content = processed_content.gsub(/@\s(\d+)\s@/) do
       num = $1
       %(<span id="anchor-#{num}" class="text-anchor-target" style="background-color: #fff0f0;">[#{num}]</span>)
     end
