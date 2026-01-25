@@ -1,5 +1,7 @@
 class RecreateSolidQueueProcesses < ActiveRecord::Migration[7.1]
   def change
+    connection.execute("DROP INDEX IF EXISTS index_solid_queue_processes_on_last_heartbeat_at")
+    connection.execute("DROP INDEX IF EXISTS index_solid_queue_processes_on_supervisor_id")
     drop_table :solid_queue_processes, if_exists: true
     create_table :solid_queue_processes do |t|
       t.string :kind, null: false
