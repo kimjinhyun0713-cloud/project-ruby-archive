@@ -44,7 +44,7 @@ class ApplicationRecord < ActiveRecord::Base
     end
 
     # 3. タグ抽出
-    processed_content = processed_content.gsub(/@([^@\s\n]+)@/) do
+    processed_content = processed_content.gsub(/@([^<>"@\s\n]+)@/) do
       found_tags << $1
       ""
     end

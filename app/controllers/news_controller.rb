@@ -6,7 +6,6 @@ class NewsController < ApplicationController
   end
 
   def show
-    @news = News.find(params[:id])
   end
 
   def new
@@ -46,11 +45,12 @@ class NewsController < ApplicationController
       return
     end
     @news.destroy
-    redirect_to news_path, notice: "Deleted successfully!", status: :see_other
+    redirect_to news_index_path, notice: "Deleted successfully!", status: :see_other
   end
 
   private
     def set_news
+      puts "Called!!!!!!!!!!!!!!!!!"
       @news = News.find(params[:id])
     end
 
